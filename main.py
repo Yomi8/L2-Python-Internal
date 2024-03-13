@@ -9,7 +9,6 @@
 # Functons
 def encrypt(message, shift):
   output = []
-  message = message.lower()
   for character in message:
     if character.isalpha():
       if character.isupper():
