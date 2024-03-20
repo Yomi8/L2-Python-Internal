@@ -5,7 +5,7 @@
   Due Date: 12 April
 '''
 
-# Functons
+# 
 def encrypt(message, shift):
   output = []
   for character in message:
@@ -26,19 +26,20 @@ def encrypt(message, shift):
 def decrypt(message, shift):
   return encrypt(message, -shift)
 
-
+# writing a file from the new decrypted message
 def file_write(file_name, message):
   with open(file_name, 'w') as file:
     file.write(message)
     file.close()
 
-
+# read the file from the user input
 def file_read(file_name):
   with open(file_name, 'r') as file:
     message = file.readline()
     file.close()
   return message
 
+# shift value input (for checking the number is integer)
 def get_shift(message):
   while True:
     try:
