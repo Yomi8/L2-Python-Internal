@@ -4,8 +4,18 @@
   Programming Internal Python for 2.7 & 2.8 ~ 10 credits
   Due Date: 12 April
 '''
+import tkinter as tk
+import gui
 
-# 
+def process_text(widget):
+  text = widget.get()
+  return text
+
+def process_shift(widget):
+  shift = widget.get()
+  return shift
+
+# shifts message over by the number of the shift
 def encrypt(message, shift):
   output = []
   for character in message:
@@ -32,6 +42,14 @@ def file_write(file_name, message):
     file.write(message)
     file.close()
 
+def file_save_dialog():
+  # File Saving Prompt
+  global file_saving
+  file_saving = tk.Tk()
+  file_saving.title("Caesar Cipher - File Saving")
+  file_saving.geometry("0x0")
+  gui.create_file_saving_dialog(file_saving)
+
 # read the file from the user input
 def file_read(file_name):
   with open(file_name, 'r') as file:
@@ -48,3 +66,30 @@ def get_shift(message):
     except ValueError:
         print("Shift value must be an integer. Please try again.")
   return shift
+
+
+def file_import(text_entry_box):
+  # Input File Prompt
+  input_file = tk.Tk()
+  input_file.title("Caesar Cipher - Input from File")
+  input_file.geometry("400x50")
+  gui.create_file_import_dialog(input_file, text_entry_box)
+
+def create_error_dialoge(title, message):
+  error_dialoge = tk.Tk()
+  error_dialoge.title(title)
+  error_dialoge.geometry("400x100")
+  error_dialoge.attributes('-topmost',True)
+
+  error_message = tk.Label(
+    error_dialoge,
+    text=message
+  )
+  error_message.place()
+
+  user_confirm = tk.Button(
+    error_dialoge,
+    text = "Ok",
+    command = error_dialoge.destroy
+  )
+  user_confirm.place()
