@@ -8,17 +8,25 @@ mode = 0
 def create_main_window(root):
   def go():
     text = text_entry_box.get("1.0", "end-1c")
-    shift = int(shift_box.get())
-    print(type(mode))
-    if mode == 0:
-      result = functions.encrypt(text, shift)
-    else:
-      result = functions.decrypt(text, shift)
-    
-    output_box.config(state="normal")
-    output_box.delete(1.0, tk.END)
-    output_box.insert(tk.END, result)
-    output_box.config(state="disabled")
+    try:
+      shift = int(shift_box.get())
+      if -27 < shift < 27:
+        if mode == 0:
+          result = functions.encrypt(text, shift)
+        else:
+          result = functions.decrypt(text, shift)
+        output_box.config(state="normal")
+        output_box.delete(1.0, tk.END)
+        output_box.insert(tk.END, result)
+        output_box.config(state="disabled")
+      else:
+        functions.create_error_dialoge("Error! Number out of range.", "Please enter a shift number between -26 and 26.")
+        shift_box.delete(1, tk.END)
+        
+    except(TypeError, ValueError):
+      functions.create_error_dialoge("Error! Invalid imput.","Please only enter numbers between -26 and 26.")
+      shift_box.delete(1, tk.END)
+      
 
   def set_mode_encrypt():
     global mode

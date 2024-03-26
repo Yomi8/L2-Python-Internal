@@ -85,11 +85,11 @@ def create_error_dialoge(title, message):
     error_dialoge,
     text=message
   )
-  error_message.place()
+  error_message.place(x=200, y=50)
 
   user_confirm = tk.Button(
     error_dialoge,
     text = "Ok",
     command = error_dialoge.destroy
   )
-  user_confirm.place()
+  user_confirm.place(x=175, y=75)  # Placing the button neatly in the center
