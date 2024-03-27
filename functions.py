@@ -85,7 +85,7 @@ def create_error_dialoge(title, message):
     error_dialoge,
     text=message
   )
-  error_message.place(x=200, y=50)
+  error_message.place(x=5, y=50)
 
   user_confirm = tk.Button(
     error_dialoge,

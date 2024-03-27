@@ -24,7 +24,7 @@ def create_main_window(root):
         shift_box.delete(1, tk.END)
         
     except(TypeError, ValueError):
-      functions.create_error_dialoge("Error! Invalid imput.","Please only enter numbers between -26 and 26.")
+      functions.create_error_dialoge("Error! Invalid input.","Please enter a number between -26 and 26.")
       shift_box.delete(1, tk.END)
       
 
@@ -108,42 +108,46 @@ def create_main_window(root):
   
   text_entry_box.place(x=30,y=10)
   file_button.place(x=30,y=250)
-  go_button.place(x=350,y=300)
+  go_button.place(x=560,y=300)
   output_box.place(x=540,y=10)
   shift_box_label.place(x=30,y=305)
   shift_box.place(x=70,y=305)
 
 def create_setup_window(root):
-
+  def window_close():
+    global mode
+    mode_choice = default.get()
+    if mode_choice == 'Decrypt':
+      mode = 1
+    else:
+      mode = 0
+    root.destroy()
+  
   mode_label = tk.Label(
     root,
     text="Mode",
   )
   
-  decrypt_button = tk.Button(
-      root,
-      text="Decrypt",
-      width=10,
-      height=2,
-  )
+  default = tk.StringVar(root)
+  choices = {'Encrypt','Decrypt'}
+  default.set('Encrypt')
 
-  encrypt_button = tk.Button(
-    root,
-    text="Encrypt",
-    width=10,
-    height=2,
-  )
+  modeMenu = tk.OptionMenu(root, default, *choices)
 
+  def change_dropdown(*args):
+      print(default.get())
+
+  default.trace_add('write', change_dropdown)
+  
   close_button = tk.Button(
     root,
     text="Close",
-    command=root.destroy
+    command=window_close
   )
   
   # Options Window Element Positions
   mode_label.place(x=180,y=10)
-  encrypt_button.place(x=40,y=50)
-  decrypt_button.place(x=250,y=50)
+  modeMenu.place(x=150,y=50)
   close_button.place(x=170,y=150)
 
 
